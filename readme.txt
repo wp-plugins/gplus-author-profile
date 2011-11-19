@@ -1,4 +1,4 @@
-=== Przeprowadzka ===
+=== GPlus Link Author Profile ===
 Contributors: ljasinskipl
 Donate link: http://www.ljasinski.pl
 Tags: google plus, gplus, author profile, rich snippet
