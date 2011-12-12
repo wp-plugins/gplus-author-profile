@@ -36,16 +36,13 @@ function jlpl_gplus_content_link($text) {
 	
 function jlpl_gplus_bio_link($text) {
 	
+	
 	$find = '[gplus]';
-	if(get_the_author_meta('gplus')) {
-		$gplus = the_author_meta('gplus');		
+		$gplus = get_the_author_meta('ljplgplus');		
 		$replace = "
 			<a rel=\"me\" href=\"".$gplus."\" title=\"My Google+ profile\">
 			  <img src=\"http://www.google.com/images/icons/ui/gprofile_button-32.png\" width=\"32\" height=\"32\">
 			</a>";
-	} else {
-		$replace = "";
-	}
 	$text = str_replace($find,$replace,$text);
 	$text = strip_tags($text,'<a><img>');
 	return $text;
@@ -53,21 +50,24 @@ function jlpl_gplus_bio_link($text) {
 
 // #############################
 // ### Backend settings
-	
+remove_filter('pre_user_description', 'wp_filter_kses');
+
+
+add_filter('pre_user_description', 'wp_filter_post_kses');
+add_filter('pre_user_description', 'jlpl_gplus_bio_link');		
 add_action( 'show_user_profile', 'ljpl_gplus_link_field_add' );
 add_action( 'edit_user_profile', 'ljpl_gplus_link_field_add' );
 
-remove_filter('pre_user_description', 'wp_filter_kses');
-add_filter('pre_user_description', 'jlpl_gplus_bio_link');	
+
 
 function ljpl_gplus_link_field_add( $user ) { ?>
 
 	<h3>GPlus Link Author Profile</h3>
 	<table class="form-table">
 		<tr>
-			<th><label for="gplus">Google+</label></th>
+			<th><label for="ljplgplus">Google+</label></th>
 			<td>
-				<input type="text" name="gplus" id="gplus" value="<?php echo esc_attr( get_the_author_meta( 'gplus', $user->ID ) ); ?>" class="regular-text" /><br />
+				<input type="text" name="ljplgplus" id="ljplgplus" value="<?php echo esc_attr( get_the_author_meta( 'ljplgplus', $user->ID ) ); ?>" class="regular-text" /><br />
 				<span class="description">Paste your Google+ profile URL. After saving 
 				insert [gplus] code into your bio to add a tagged link to your profile.
 				</span>
@@ -102,7 +102,7 @@ function ljpl_gplus_link_field_save( $user_id ) {
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return false;
 
-	update_usermeta( $user_id, 'gplus', $_POST['gplus'] );
+	update_usermeta( $user_id, 'ljplgplus', $_POST['ljplgplus'] );
 	update_usermeta( $user_id, 'ljpl-content-author-show', $_POST['ljpl-content-author-show'] );
 	update_usermeta( $user_id, 'ljpl-content-author-text', $_POST['ljpl-content-author-text'] );
 }

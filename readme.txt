@@ -34,6 +34,8 @@ Mail me at studio_wp@ljasinski.pl
 == Screenshots ==
 
 == Changelog ==
+= 1.2 =
+Fixed some compatibility issues. Now [gplus] shortcode should work in all sites.
 
 = 1.0 =
 Stable version.
