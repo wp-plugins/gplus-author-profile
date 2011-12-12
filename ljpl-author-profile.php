@@ -5,7 +5,7 @@
  Description: Simple plugin to get your author's profile linked in Google. 
  Grants autorship photo in Google SERP. Visit blog.ljasinski.pl for more details.
  All settings are per user, change them in your profile.
- Version: 1.0
+ Version: 1.2
  Author: Łukasz Jasiński
  Author URI: http://www.ljasinski.pl
  Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
